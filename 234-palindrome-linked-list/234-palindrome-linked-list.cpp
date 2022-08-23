@@ -11,23 +11,39 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        vector<int> numbers;
         
-        while(head->next != NULL){
-            numbers.push_back(head->val);
-            head = head->next;
-        }
-        numbers.push_back(head->val);
-        
-        int num_size = numbers.size();
-        
-        for(auto a:numbers){
-            cout<<a<<endl;
+        if(head->next == NULL){
+            return true;
         }
         
-        for(int i=0; i<num_size-1/2; i++){
-            if(numbers[i] != numbers[num_size-1-i]){
+        ListNode *slow =head,*fast =head;
+        
+        while(fast->next && fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
+            
+        }
+        
+        ListNode *rev = NULL, *curr = slow->next, *temp;
+        
+        while(curr != NULL){
+            temp = curr->next;
+            curr->next = rev;
+            rev = curr;
+            curr = temp;
+        }
+        
+        ListNode *p = head, *q= rev;
+        
+        while(p-> next != NULL){
+            if(p->val != q->val){
                 return false;
+            }
+            p = p->next;
+            if(q->next == NULL){
+                q = p;
+            }else{
+                q = q->next;
             }
         }
         
