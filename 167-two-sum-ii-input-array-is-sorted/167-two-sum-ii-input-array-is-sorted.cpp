@@ -1,15 +1,29 @@
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& numbers, int target) {
-        unordered_map<int,int> umap;
+    int searchIndex(vector<int>& numbers,int low, int remain){
+        int high = numbers.size()-1;
         
-        for(int i=0; i<numbers.size(); i++){
-            umap[numbers[i]] = i+1;
+        while(low < high){
+            int mid = low + (high-low)/2;
+            if(numbers[mid] < remain){
+                low = mid+1;
+            }else{
+                high = mid;
+            }
         }
+        
+        return low;
+    }
+    
+    vector<int> twoSum(vector<int>& numbers, int target) {
         
         for(int i=0; i<numbers.size(); i++){
             int remain = (target -numbers[i]);
-            if(umap[remain] > 0) { return {i+1,umap[remain]};}
+            if(searchIndex(numbers,i+1,remain) > -1) {
+                if(numbers[searchIndex(numbers,i+1,remain)] == remain){
+                    return  {i+1,searchIndex(numbers,i+1,remain)+1};
+                }
+            }
             
         }
         
