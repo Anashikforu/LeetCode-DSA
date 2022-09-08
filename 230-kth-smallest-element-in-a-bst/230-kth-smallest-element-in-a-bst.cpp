@@ -15,8 +15,8 @@ public:
         
         if(!root){return;}
         
-        values.push_back(root->val);
         dfs(root->left,values);
+        values.push_back(root->val);
         dfs(root->right,values);
         
     }
@@ -26,7 +26,7 @@ public:
         
         dfs(root,values);
         
-        sort(values.begin(), values.end());
+        // sort(values.begin(), values.end());
         
         return values[k-1];
     }
