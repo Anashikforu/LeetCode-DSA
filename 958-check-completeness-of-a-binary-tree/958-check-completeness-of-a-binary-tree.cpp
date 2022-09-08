@@ -34,8 +34,7 @@ public:
                     quiz.push(vt->right);
                 }
                 
-                if(!vt->right and !vt->left){ flag =1; }
-                if(!vt->right and vt->left ){ flag =1; }
+                if((!vt->left and !vt->right) or (vt->left and !vt->right) ){ flag =1; }
             }
             
             
