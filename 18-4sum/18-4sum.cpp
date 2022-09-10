@@ -27,9 +27,9 @@ public:
                         while(left<right && nums[right] == check[3]){ right--;}
                     }
                 }
-                // while(j + 1 < nums.size() && nums[j + 1] == nums[j]) ++j;
+                while(j + 1 < nums.size() && nums[j + 1] == nums[j]) ++j;
             }
-            // while (i + 1 < nums.size() && nums[i + 1] == nums[i]) ++i;
+            while (i + 1 < nums.size() && nums[i + 1] == nums[i]) ++i;
         }
         
         vector<vector<int>> result(sv.begin(),sv.end());
