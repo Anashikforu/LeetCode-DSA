@@ -11,6 +11,9 @@ public:
                 umap[s[j]]++;
             }
             result = max(result,(int)umap.size());
+            if(result == (s.length()-i)){
+                break;
+            }
         }
         
         return result;
