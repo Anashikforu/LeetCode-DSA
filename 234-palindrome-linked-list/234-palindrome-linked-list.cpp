@@ -10,26 +10,36 @@
  */
 class Solution {
 public:
-    bool helper(ListNode **front, ListNode *back){
+    bool isPalindrome(ListNode* head) {
+        ListNode* fast= head, *slow = head;
         
-        if(back == NULL){
-            return true;
+        while(fast->next and fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
         }
         
-        bool equal_so_far = helper(front,back->next);
         
-        bool value_equal = ((*front)->val == back->val);
+        ListNode* curr= slow;
+        ListNode* prev= NULL;
+        ListNode* next_p= NULL;
         
-        *front = (*front)->next;
+        while(curr){
+            next_p = curr->next;
+            curr->next = prev;
+            
+            prev = curr;
+            curr = next_p;
+        }
         
-        return equal_so_far && value_equal;
+        slow = prev;
+        while(slow->next){
+            if(head->val != slow->val){
+                return false;
+            }
+            slow = slow->next;
+            head = head->next;
+        }
         
-    }
-    
-    bool isPalindrome(ListNode* head) {
-        
-        ListNode *front = head;
-        
-        return helper(&front , head);
+        return true;
     }
 };
