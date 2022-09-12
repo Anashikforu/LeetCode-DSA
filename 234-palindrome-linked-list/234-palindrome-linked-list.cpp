@@ -11,35 +11,42 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        ListNode* fast= head, *slow = head;
-        
-        while(fast->next and fast->next->next){
+        if(head->next == NULL ){
+            return true;
+        }
+
+        ListNode *slow = head, *fast = head;
+
+        //Find the middle of the linked List
+        while(fast->next  && fast->next->next){
             slow = slow->next;
             fast = fast->next->next;
         }
-        
-        
-        ListNode* curr= slow;
-        ListNode* prev= NULL;
-        ListNode* next_p= NULL;
-        
-        while(curr){
-            next_p = curr->next;
-            curr->next = prev;
-            
-            prev = curr;
-            curr = next_p;
+        //Reverse the linked List
+        ListNode *rev = NULL, *curr = slow->next, *temp ;
+        while(curr != NULL){
+            temp  = curr->next;
+            curr->next  = rev;
+            rev = curr;
+            curr = temp;
         }
-        
-        slow = prev;
-        while(slow->next){
-            if(head->val != slow->val){
+
+        //Check simillarity
+        struct ListNode* p = head;
+        struct ListNode* q = rev;
+        while(p->next != NULL){
+            if(p->val != q->val){
                 return false;
             }
-            slow = slow->next;
-            head = head->next;
+            p=p->next;
+            if(q->next == NULL){
+                q=p;
+            }else{
+                q=q->next;
+            }
         }
-        
+
+
         return true;
     }
 };
