@@ -11,8 +11,9 @@
  */
 class Solution {
 public:
-    void collectpaths(TreeNode* root,unordered_map<int,int> paths,int &palindrom){
-        paths[root->val]++;
+    void collectpaths(TreeNode* root,int paths,int &palindrom){
+        
+        paths ^= (1<<root->val);
         
         if(root->left){
             collectpaths(root->left,paths,palindrom);
@@ -21,16 +22,7 @@ public:
             collectpaths(root->right,paths,palindrom);
         }
         if(!root->left and !root->right){
-            int only_one = 0;
-            
-            for(auto a:paths){
-                if(a.second%2 == 1){
-                    only_one++;
-                }
-                if(only_one > 1){break;}
-            }
-            
-            if(only_one < 2){palindrom++;}
+            if((paths & (paths - 1)) == 0){palindrom++;}
 
         }
     }
@@ -38,7 +30,7 @@ public:
     int pseudoPalindromicPaths (TreeNode* root) {
         unordered_map<int,int> umap;
         int palindrom =0;
-        collectpaths(root,umap,palindrom);
+        collectpaths(root,0,palindrom);
         
         return palindrom;
     }
