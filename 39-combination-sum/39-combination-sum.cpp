@@ -1,7 +1,6 @@
 class Solution {
 public:
-    
-    void comSum(vector<int>& candidates,set<vector<int>> &results, int target,vector<int> result){
+    void comSum(vector<int>& candidates,set<vector<int>> &results,int index, int target,vector<int> result){
         
         if(target == 0){
             sort(result.begin(),result.end());
@@ -9,15 +8,15 @@ public:
             return;
         }
         
-        for(int i=0; i<candidates.size(); i++){
+        for(int i=index; i<candidates.size(); i++){
             
             if( target-candidates[i] < 0){ break;}
             
-            if( i > 0 and candidates[i-1] == candidates[i]){ continue;}
+            if(i> index and candidates[i-1] == candidates[i]){ continue;}
             
             vector<int> cpyresult = result;
             cpyresult.push_back(candidates[i]);
-            comSum(candidates,results,target-candidates[i],cpyresult);
+            comSum(candidates,results,i,target-candidates[i],cpyresult);
 
         }
         
@@ -29,7 +28,7 @@ public:
         
         sort(candidates.begin(),candidates.end());
         
-        comSum(candidates,results,target,{});
+        comSum(candidates,results,0,target,{});
         
         vector<vector<int>>comresults(results.begin(),results.end());
         
