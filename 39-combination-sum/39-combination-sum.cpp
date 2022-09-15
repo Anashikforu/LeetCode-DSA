@@ -1,34 +1,38 @@
 class Solution {
 public:
-    void recursion(map<vector<int>,int> &umap,vector<int> candidates,vector<vector<int>> &results,vector<int> result, int target){
-        if( target == 0){
+    
+    void comSum(vector<int>& candidates,set<vector<int>> &results, int target,vector<int> result){
+        
+        if(target == 0){
             sort(result.begin(),result.end());
-            if(umap.find(result) == umap.end()){
-                results.push_back(result);
-                umap[result]++;
-            }
+            results.insert(result);
             return;
         }
         
-        for(auto a:candidates){
+        for(int i=0; i<candidates.size(); i++){
+            
+            if( target-candidates[i] < 0){ break;}
+            
+            if( i > 0 and candidates[i-1] == candidates[i]){ continue;}
+            
             vector<int> cpyresult = result;
-            if(target -a >=0){
-                cpyresult.push_back(a);
-                recursion(umap,candidates,results,cpyresult,target-a);
-            }
+            cpyresult.push_back(candidates[i]);
+            comSum(candidates,results,target-candidates[i],cpyresult);
+
         }
+        
     }
     
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<vector<int>> results;
+        set<vector<int>> results;
         map<vector<int>,int> umap;
         
-        set<int> cand(candidates.begin(), candidates.end());
-        vector<int> v(cand.begin(), cand.end());
-        sort(v.begin(),v.end());
+        sort(candidates.begin(),candidates.end());
         
-        recursion(umap,v,results,{},target);
+        comSum(candidates,results,target,{});
         
-        return results;
+        vector<vector<int>>comresults(results.begin(),results.end());
+        
+        return comresults;
     }
 };
