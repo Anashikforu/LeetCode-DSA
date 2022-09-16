@@ -12,13 +12,12 @@ public:
     }
     
     void dfs(vector<vector<string>> &result, string &s, int start, vector<string> &currentList) {
-        if (start >= s.length()) result.push_back(currentList);
-        for (int end = start; end < s.length(); end++) {
-            if (palindromeChecker(s, start, end)) {
-                // add current substring in the currentList
+        if(start == s.length()){result.push_back(currentList);}
+        
+        for(int end=start; end<s.length(); end++){
+            if(palindromeChecker(s,start,end)){
                 currentList.push_back(s.substr(start, end - start + 1));
-                dfs(result, s, end + 1, currentList);
-                // backtrack and remove the current substring from currentList
+                dfs(result, s, end+1, currentList);
                 currentList.pop_back();
             }
         }
