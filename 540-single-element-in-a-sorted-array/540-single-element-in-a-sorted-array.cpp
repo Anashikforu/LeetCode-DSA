@@ -1,15 +1,20 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        unordered_map<int,int> umap;
-        for(auto a:nums){
-            umap[a]++;
-        }
-        for(auto a:umap){
-            if(a.second == 1){
-                return a.first;
+        if(nums.size() == 1){return nums[0];}
+        int low=0,high=nums.size()-1;
+        while(low<high){
+            cout<<low<<" "<<high<<endl;
+            int mid=(low+high)/2;
+            if(mid%2 == 1){mid++;}
+            if(nums[mid-1] == nums[mid]){
+                high = mid-2;
+            }else if(nums[mid] == nums[mid+1]){
+                low = mid+2;
+            }else{
+                return nums[mid];
             }
         }
-        return 0;
+        return nums[low];
     }
 };
