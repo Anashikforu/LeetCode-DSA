@@ -4,7 +4,6 @@ public:
         if(nums.size() == 1){return nums[0];}
         int low=0,high=nums.size()-1;
         while(low<high){
-            cout<<low<<" "<<high<<endl;
             int mid=(low+high)/2;
             if(mid%2 == 1){mid++;}
             if(nums[mid-1] == nums[mid]){
