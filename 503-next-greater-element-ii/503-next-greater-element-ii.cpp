@@ -4,22 +4,20 @@ public:
         if(nums.size() == 1){
             return {-1};
         }
-        vector<int> vals;
-        int max=0;
         
-        for(int i=0; i<nums.size(); i++){
-            int j=i+1;
-            if(j >= nums.size()){j=0;}
-            while(nums[j]<=nums[i]){
-                j++;
-                if(j == nums.size()){j=0;}
-                if(j==i){break;}
+        vector<int> vals(nums.size(),-1);
+        stack<int> st;
+        st.push(nums[nums.size()-1]);
+        int i=0;
+        
+        for(int x=2*nums.size()-1; x>=0; x--){
+            i=x%nums.size();
+            
+            while(!st.empty() and st.top() <= nums[i]){
+                st.pop();
             }
-            if(nums[i] == nums[j]){
-                vals.push_back(-1);
-            }else{
-                vals.push_back(nums[j]);
-            }
+            vals[i] = st.empty()?-1:st.top();
+            st.push(nums[i]);
             
         }
         
