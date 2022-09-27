@@ -2,33 +2,28 @@ class MinStack {
 public:
     
     stack<int> mystack;
-    priority_queue<int, vector<int>, greater<int>> minQueue;
+    int mini = INT_MAX;
     
     MinStack() {
         stack<int> temp;
-        priority_queue<int, vector<int>, greater<int>> mintemp;
         mystack = temp;
-        minQueue = mintemp;
     }
     
     void push(int val) {
         mystack.push(val);
-        minQueue.push(val);
+        mini = min(mini,val);
     }
     
     void pop() {
-        priority_queue<int, vector<int>, greater<int>> temp;
-        
-        while(mystack.top() != minQueue.top()){
-            temp.push(minQueue.top());
-            minQueue.pop();
-        }
-        minQueue.pop();
-        while(!temp.empty()){
-            minQueue.push(temp.top());
+        stack<int> temp = mystack;
+        if(mini == temp.top()){
+            mini = INT_MAX;
             temp.pop();
+            while(!temp.empty()){
+                mini = min(mini,temp.top());
+                temp.pop();
+            }
         }
-        
         mystack.pop();
     }
     
@@ -37,7 +32,7 @@ public:
     }
     
     int getMin() {
-        return minQueue.top();
+        return mini;
     }
 };
 
