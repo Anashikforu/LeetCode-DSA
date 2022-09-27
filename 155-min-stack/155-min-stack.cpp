@@ -19,17 +19,15 @@ public:
     void pop() {
         priority_queue<int, vector<int>, greater<int>> temp;
         
-        
-            while(mystack.top() != minQueue.top()){
-                temp.push(minQueue.top());
-                minQueue.pop();
-            }
+        while(mystack.top() != minQueue.top()){
+            temp.push(minQueue.top());
             minQueue.pop();
-            while(!temp.empty()){
-                minQueue.push(temp.top());
-                temp.pop();
-            }
-        
+        }
+        minQueue.pop();
+        while(!temp.empty()){
+            minQueue.push(temp.top());
+            temp.pop();
+        }
         
         mystack.pop();
     }
