@@ -4,7 +4,7 @@ public:
       deque < int > dq;
       vector < int > ans;
       for (int i = 0; i < nums.size(); i++) {
-          if(!dq.empty() and i-k>= dq.front()){
+          while(!dq.empty() and i-k>= dq.front()){
               dq.pop_front();
           }
           
