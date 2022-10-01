@@ -1,20 +1,33 @@
 class Solution {
 public:
     int myAtoi(string s) {
-        long long val=0;
-        bool ok=0;
-        int i=0,n=s.size();
-        while(i<n && s[i]==' '){i++;}
-        if(i==n){return 0;}
-        if(s[i]=='-'){ok=1;i++;}
-        else if(s[i]=='+'){ok=0;i++;}
-        while(i<n && isdigit(s[i])){
-            val=10*val + (s[i]-'0');i++;
-            if(val>1e10){break;}
+        int i=0;
+        bool pos=1;
+        long long sum =0;
+        while(s[i] == ' '){
+            i++;
         }
-        if(ok){val=-val;}
-        if(val>=INT_MAX){val=INT_MAX;}
-        if(val<=INT_MIN){val=INT_MIN;}
-        return (int)val;
+        if(s[i] == '-'){ pos=0; i++;}
+        else if(s[i] == '+'){ i++;}
+        
+        if(!isdigit(s[i])){ return 0;}
+        else{
+            sum = int(s[i])-48;
+            i++;
+        }
+        
+        while(isdigit(s[i])){
+            sum = sum*10+int(s[i])-48;
+            i++;
+            if(sum>1e10){break;}
+        }
+        
+        if(pos == 0){ sum *= -1;}
+        
+        if(sum >= INT_MAX ){ return  INT_MAX;}
+        if(sum <= INT_MIN ){ return  INT_MIN;}
+        
+        return (int)sum;
+        
     }
 };
