@@ -9,13 +9,9 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
-        ListNode* next_p = node->next;
-        node->val = next_p->val;
-        
-        node->next = next_p->next;
-        next_p->next = nullptr;
-        delete(next_p);
-        
-        // cout<<next_p->next->val<<endl;
+        ListNode* next = node->next;
+        *node = *next;
+        // Don't be that person that leaks memory.
+        delete next;
     }
 };
