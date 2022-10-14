@@ -12,8 +12,9 @@ public:
         ListNode* next_p = node->next;
         node->val = next_p->val;
         
-        ListNode* prev = next_p->next;
-        node->next = prev;
+        node->next = next_p->next;
+        next_p->next = nullptr;
+        delete(next_p);
         
         // cout<<next_p->next->val<<endl;
     }
