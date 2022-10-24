@@ -1,38 +1,28 @@
-class Solution {
-public:
-    bool dfs(int node,vector<vector<int>>& graph,vector<int> &visited){
-        
-        if(visited[node] == -1){visited[node] = 1;}
-        
-        for(auto it:graph[node]){
-            if(visited[it] == -1){
-                visited[it] = 1- visited[node];
-                if(!dfs(it,graph,visited)){
-                    return false;
-                }
-            }else if(visited[it] == visited[node]){
-                return false;
-            }
-        }
-        
-        return true;
-    }
+class Solution:
     
-    bool isBipartite(vector<vector<int>>& graph) {
-        int maxV = graph.size();
-    
-        vector<int> visited(maxV,-1);
+    def isBipartite(self, graph: List[List[int]]) -> bool:
         
-        for(int i=0; i<maxV; i++){
-            if(visited[i] == -1){
-                if(!dfs(i,graph,visited)){
-                    return false;
-                }
-            }
-        }
+        visited = [-1]*len(graph);
         
+        def dfs(i,visited) -> bool:
+            
+            if visited[i] == -1:
+                visited[i] = 1
+            
+            for u in graph[i]:
+                if visited[u] == -1:
+                    visited[u] = 1-visited[i]
+                    if(dfs(u,visited) == False):
+                        return False
+                elif visited[u] == visited[i]:
+                    return False
+            
+            return True
         
-        return true;
+        for i in range(len(graph)):
+            if visited[i] == -1:
+                if(dfs(i,visited) == False):
+                    return False
         
-    }
-};
+        return True
+        
