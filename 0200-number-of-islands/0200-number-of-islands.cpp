@@ -4,9 +4,7 @@ public:
         
         int n = grid.size(), m = grid[0].size();
         
-        if(i >= n or i < 0){return island;}
-        
-        if(j >= m or j < 0){return island;}
+        if(i >= n or i < 0 or j >= m or j < 0){return island;}
         
         if(visited[i][j] == true){return island;}
         
