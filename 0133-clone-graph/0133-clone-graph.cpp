@@ -21,12 +21,12 @@ public:
 
 class Solution {
 public:
-    Node* dfs(Node* node,unordered_map<Node*,Node*> &mp) {
+    Node* dfs(Node* node,unordered_map<Node*,Node*> &mp){
         vector<Node*> neighbors;
-        Node* clone = new Node(node->val);
+        Node *clone = new Node(node->val);
         mp[node] = clone;
         
-        for(auto it: node->neighbors){
+        for(auto it:node->neighbors){
             if(mp.find(it) != mp.end()){
                 neighbors.push_back(mp[it]);
             }else{
@@ -43,9 +43,11 @@ public:
         unordered_map<Node*,Node*> mp;
         
         if(!node){return NULL;}
-        if(node->neighbors.size() ==0){
-            Node* clone = new Node(node->val);
-            return clone;
+        
+        if(node->neighbors.size() == 0){
+            Node *res = new Node(node->val);
+            
+            return res;
         }
         
         return dfs(node,mp);
