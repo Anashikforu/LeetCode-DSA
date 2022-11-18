@@ -23,7 +23,7 @@ class Solution {
 public:
     Node* dfs(Node* node,unordered_map<Node*,Node*> &mp){
         vector<Node*> neighbors;
-        Node *clone = new Node(node->val);
+        Node* clone = new Node(node->val);
         mp[node] = clone;
         
         for(auto it:node->neighbors){
@@ -45,11 +45,11 @@ public:
         if(!node){return NULL;}
         
         if(node->neighbors.size() == 0){
-            Node *res = new Node(node->val);
-            
-            return res;
+            Node* clone = new Node(node->val);
+            return clone;
         }
         
         return dfs(node,mp);
+        
     }
 };
