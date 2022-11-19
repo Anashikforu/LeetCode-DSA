@@ -1,28 +1,41 @@
 class Solution {
 public:
-    bool iscycle(vector<int> adj[],vector<int> &vis,int id){
-        if(vis[id]==1)
+    bool isCycle(int n,vector<int> adj[],vector<int> &visited){
+        
+        if(visited[n] == 1){
             return true;
-        if(vis[id]==0){
-            vis[id]=1;
-            for(auto edge : adj[id]){
-                if(iscycle(adj,vis,edge))
+        }
+        
+        if(visited[n] == 0){
+            visited[n] = 1;
+
+            for(auto it:adj[n]){
+                if(isCycle(it,adj,visited)){
                     return true;
+                }
             }
         }
-        vis[id] = 2;
+        
+        visited[n] = 2;
+        
         return false;
     }
-    bool canFinish(int n, vector<vector<int>>& pre) {
-        vector<int> adj[n];
-        for(auto edge : pre)
-            adj[edge[1]].push_back(edge[0]);
-        vector<int> vis(n,0);
+    
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int> visited(numCourses,0);
         
-        for(int i=0;i<n;i++){
-            if(iscycle(adj,vis,i))
-                return false;
+        vector<int> adj[numCourses];
+        
+        for(auto a:prerequisites){
+            adj[a[1]].push_back(a[0]);
         }
+        
+        for(int i=0; i<numCourses; i++){
+            if(isCycle(i,adj,visited)){
+                return false;
+            }
+        }
+        
         return true;
     }
 };
