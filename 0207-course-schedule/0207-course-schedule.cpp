@@ -1,36 +1,28 @@
 class Solution {
 public:
-    
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<int> adj[numCourses];
-        vector<int> res;
-        vector<int> inDegree(numCourses,0);
-        for(auto a:prerequisites){
-            adj[a[1]].push_back(a[0]);
-            inDegree[a[0]]++;
-        }
-        
-        queue<int> pq;
-        for(int i=0; i<numCourses; i++){
-            if(inDegree[i] == 0){
-                pq.push(i);
+    bool iscycle(vector<int> adj[],vector<int> &vis,int id){
+        if(vis[id]==1)
+            return true;
+        if(vis[id]==0){
+            vis[id]=1;
+            for(auto edge : adj[id]){
+                if(iscycle(adj,vis,edge))
+                    return true;
             }
         }
+        vis[id] = 2;
+        return false;
+    }
+    bool canFinish(int n, vector<vector<int>>& pre) {
+        vector<int> adj[n];
+        for(auto edge : pre)
+            adj[edge[1]].push_back(edge[0]);
+        vector<int> vis(n,0);
         
-        while(!pq.empty()){
-            int top = pq.front();
-            pq.pop();
-            res.push_back(top);
-            for(auto a:adj[top]){
-                --inDegree[a];
-                if(inDegree[a] == 0){
-                    pq.push(a);
-                }
-            }
-            
+        for(int i=0;i<n;i++){
+            if(iscycle(adj,vis,i))
+                return false;
         }
-        
-        
-        return res.size()==numCourses?true:false;
+        return true;
     }
 };
