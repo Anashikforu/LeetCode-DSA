@@ -1,18 +1,14 @@
 class Solution {
 public:
-    bool isCycle(int n,vector<int> adj[],vector<int> &visited){
-        
-        if(visited[n] == 1){
+    bool isCycle(int n, vector<int> adj[], vector<int>& visited){
+        if(visited[n] == 1)
             return true;
-        }
         
         if(visited[n] == 0){
             visited[n] = 1;
-
             for(auto it:adj[n]){
-                if(isCycle(it,adj,visited)){
+                if(isCycle(it,adj,visited))
                     return true;
-                }
             }
         }
         
@@ -26,8 +22,8 @@ public:
         
         vector<int> adj[numCourses];
         
-        for(auto a:prerequisites){
-            adj[a[1]].push_back(a[0]);
+        for(auto edge:prerequisites){
+            adj[edge[1]].push_back(edge[0]);
         }
         
         for(int i=0; i<numCourses; i++){
