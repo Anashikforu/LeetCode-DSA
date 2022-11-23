@@ -21,35 +21,36 @@ public:
 
 class Solution {
 public:
-    Node* dfs(Node* node,unordered_map<Node*,Node*> &mp){
+    Node* solution(Node* node,unordered_map<Node*,Node*> &mp){
         vector<Node*> neighbors;
-        Node* clone = new Node(node->val);
-        mp[node] = clone;
+        
+        Node* cur = new Node(node->val);
+        mp[node] = cur;
         
         for(auto it:node->neighbors){
             if(mp.find(it) != mp.end()){
                 neighbors.push_back(mp[it]);
             }else{
-                neighbors.push_back(dfs(it,mp));
+                neighbors.push_back(solution(it,mp));
             }
         }
         
-        clone->neighbors = neighbors;
+        cur->neighbors = neighbors;
         
-        return clone;
+        return cur;
     }
     
     Node* cloneGraph(Node* node) {
         unordered_map<Node*,Node*> mp;
-        
         if(!node){return NULL;}
         
         if(node->neighbors.size() == 0){
-            Node* clone = new Node(node->val);
-            return clone;
+            Node* cur = new Node(node->val);
+            return cur;
         }
         
-        return dfs(node,mp);
-        
+        return solution(node,mp);
+                
+            
     }
 };
