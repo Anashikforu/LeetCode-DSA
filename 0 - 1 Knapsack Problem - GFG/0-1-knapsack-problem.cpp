@@ -28,9 +28,25 @@ class Solution
     }
     int knapSack(int W, int wt[], int val[], int n) 
     { 
-        vector<vector<int>> dp(n,vector<int>(W+1,-1));
+        vector<vector<int>> dp(n,vector<int>(W+1,0));
        // Your code here
-       return func(W,wt,val,n-1,dp);
+       
+       for(int i=wt[0]; i<=W; i++ ){
+           dp[0][i] = val[0];
+       }
+       
+       
+       for(int i=1; i<n; i++){
+           for(int j=0; j<=W; j++){
+               dp[i][j] = dp[i-1][j];
+               if(j >= wt[i]){
+                   dp[i][j] = max(dp[i][j],val[i]+dp[i-1][j-wt[i]]);
+               }
+           }
+       }
+       
+       return dp[n-1][W];
+    //   return func(W,wt,val,n-1,dp);
     }
 };
 
