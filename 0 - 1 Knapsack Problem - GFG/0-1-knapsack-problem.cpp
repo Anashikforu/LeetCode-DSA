@@ -19,13 +19,13 @@ class Solution
        
        
        for(int i=1; i<n; i++){
-           for(int j=0; j<=W; j++){
-               dp[j] = prev[j];
+           for(int j=W; j>=0; j--){
+            //   dp[j] = prev[j];
                if(j>=wt[i]){
-                   dp[j] = max(dp[j],val[i]+prev[j-wt[i]]);
+                   prev[j] = max(prev[j],val[i]+prev[j-wt[i]]);
                }
            }
-           prev= dp;
+        //   prev= dp;
        }
        
        return prev[W];
