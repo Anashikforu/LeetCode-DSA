@@ -1,12 +1,5 @@
 class Solution {
 public:
-    bool f(int ind,vector<int>& nums, int target){
-        if(target == 0){return true;}
-        
-        if(ind == nums.size()){return false;}
-        
-        return f(ind+1,nums,target-nums[ind]) or f(ind+1,nums,target);
-    }
     bool canPartition(vector<int>& nums) {
         int sum =0;
         for(auto a:nums){sum += a;}
@@ -29,6 +22,5 @@ public:
         }
         
         return dp[nums.size()-1][sum];
-        // return f(0,nums,sum);
     }
 };
