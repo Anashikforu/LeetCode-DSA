@@ -17,11 +17,13 @@ public:
     }
     
     void merge_sort(vector<int>& nums,int left,int right){
-        if(left == right){return;}
+        // if(left == right){return;}
         int mid = (left+right)/2;
-        merge_sort(nums,left,mid);
-        merge_sort(nums,mid+1,right);
-        merge(nums,left,mid,right);
+        if(left<right){
+            merge_sort(nums,left,mid);
+            merge_sort(nums,mid+1,right);
+            merge(nums,left,mid,right);
+        }
     }
     
     vector<int> sortArray(vector<int>& nums) {
