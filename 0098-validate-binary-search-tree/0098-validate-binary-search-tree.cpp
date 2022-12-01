@@ -11,22 +11,17 @@
  */
 class Solution {
 public:
-    void dfs(vector<int> &vals,TreeNode* root){
-        if(!root){return;}
-        dfs(vals,root->left);
-        vals.push_back(root->val);
-        dfs(vals,root->right);
+    bool helper(TreeNode* root,long min,long max){
+        if(!root){return true;}
+        
+        if(root->val > min && root->val < max){
+            return helper(root->left,min,root->val) and helper(root->right,root->val,max);
+        }
+        
+        return false;
     }
     
     bool isValidBST(TreeNode* root) {
-        if(!root){return true;}
-        vector<int> vals;
-        dfs(vals,root);
-        if(vals.size() >= 2){
-            for(int i=1; i<vals.size(); i++){
-                if(vals[i] <= vals[i-1]){return false;}
-            }
-        }
-        return true;
+        return helper(root,LONG_MIN,LONG_MAX);
     }
 };
