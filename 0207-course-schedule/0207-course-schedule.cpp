@@ -4,8 +4,8 @@ public:
         vector<int> indegree(numCourses,0);
         vector<vector<int>> adj(numCourses);
         for(auto row:prerequisites){
-            indegree[row[1]]++;
-            adj[row[0]].push_back(row[1]);
+            indegree[row[0]]++;
+            // adj[row[0]].push_back(row[1]);
             adj[row[1]].push_back(row[0]);
         }
         
