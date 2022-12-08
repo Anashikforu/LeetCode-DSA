@@ -1,17 +1,18 @@
 class Solution {
 public:
     bool binary_search(vector<int> matrix,int target){
-        int low=0,high=matrix.size()-1;
+        int low = 0, high = matrix.size()-1;
         
         while(low<high){
             int mid = (low+high)/2;
-            if(matrix[mid] < target){
+            if(matrix[mid] <target){
                 low = mid+1;
             }else{
                 high = mid;
             }
         }
-        if (matrix[low] == target){return true;}
+        
+        if(matrix[low] == target){return true;}
         return false;
     }
     
