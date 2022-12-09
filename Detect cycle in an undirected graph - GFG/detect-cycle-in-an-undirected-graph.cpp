@@ -7,16 +7,13 @@ class Solution {
   public:
     // Function to detect cycle in an undirected graph.
     bool dfs(vector<int> adj[],vector<bool> &visited,int ind,int parent){
-    
-        if(visited[ind]){return true;}
+        if(visited[ind])return true;
         
         visited[ind] = true;
         
         for(auto a:adj[ind]){
             if(!visited[a]){
-                if(dfs(adj,visited,a,ind)){
-                    return true;
-                }
+                if(dfs(adj,visited,a,ind))return true;
             }else if(a != parent){
                 return true;
             }
