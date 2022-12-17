@@ -11,7 +11,24 @@ class Solution
     void sort012(int a[], int n)
     {
         // code here 
-        sort(a,a+n);
+        int zero=0,one=0,two=0;
+        for(int i=0; i<n; i++){
+            if(a[i] == 0) zero++;
+            else if(a[i] == 1) one++;
+            else if(a[i] == 2) two++;
+        }
+        
+        for(int i=0; i<zero; i++){
+            a[i] = 0;
+        }
+        
+        for(int i=zero; i<one+zero; i++){
+            a[i] = 1;
+        }
+        
+        for(int i=one+zero; i<one+zero+two; i++){
+            a[i] = 2;
+        }
     }
     
 };
