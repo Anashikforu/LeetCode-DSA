@@ -40,7 +40,8 @@ class Solution{
     
     int kthSmallest(int arr[], int l, int r, int k) {
         //code here
-        quick_sort(arr,l,r);
+        // quick_sort(arr,l,r);
+        sort(arr+l,arr+r+1);
      
         return arr[l+k-1];
         
