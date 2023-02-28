@@ -1,28 +1,21 @@
 class Solution:
     def check(self, nums: List[int]) -> bool:
-        mini = min(nums)
+        bp = 0
+        temp = nums[0]
         
-        if len(nums)==1:
-            return True
-        
-        temp = len(nums)
-        
-        for i in range(1,len(nums)):
-            if(nums[i] <nums[i-1]) and nums[i] == mini:
-                temp = i
-                break
-            elif nums[i] < nums[i-1] :
+        for num in nums:
+            if num < temp and bp > 1:
                 return False
+            if num < temp:
+                bp += 1
+            temp = num
         
-        for num in nums[temp:]:
-            if num < mini:
+        for num in nums:
+            if num < temp and bp > 1:
                 return False
-            mini = num
-        
-        for num in nums[:temp]:
-            if num < mini:
-                return False
-            mini = num
+            if num < temp:
+                bp += 1
+            temp = num
         
         return True
-                
+        
