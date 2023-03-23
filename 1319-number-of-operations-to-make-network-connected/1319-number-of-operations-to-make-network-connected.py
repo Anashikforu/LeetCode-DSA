@@ -1,47 +1,32 @@
-class Solution {
-public:
-    void dfs(unordered_map<int,vector<int>> &adj,vector<bool> &visited,int curr){
+class Solution:
+        
+    def makeConnected(self, n: int, connections: List[List[int]]) -> int:
+        
+        if n - 1 > len(connections):
+            return -1
+        
+        adj = [[] for i in range(n)]
+        edge = len(connections)
+        
+        for connection in connections:
+            adj[connection[0]].append(connection[1])
+            adj[connection[1]].append(connection[0])
+        
+        visited = [False for i in range(n)]
+        components = 0
+                
+        def dfs(adj,curr,visited):
+        
+            visited[curr] = True
 
-        visited[curr] = true;
-        
-        for(auto i:adj[curr]){
-            if(visited[i] == false){
-                dfs(adj,visited,i);
-            }
-        }
-        
-    }
+            for i in adj[curr]:
+                if visited[i] == False:
+                    dfs(adj,i,visited)
     
-    int makeConnected(int n, vector<vector<int>>& connections) {
+        for i in range(n):
+            if visited[i] == False:
+                components += 1
+                dfs(adj,i,visited)
         
+        return components - 1
         
-        unordered_map<int,vector<int>> adj;
-        int edge =connections.size();
-        
-        for(auto connection:connections){
-            adj[connection[0]].push_back(connection[1]);
-            adj[connection[1]].push_back(connection[0]);
-        }
-        
-        
-        vector<bool> visited(n,false);
-        int component = 0;
-        for(int i=0; i<n; i++){
-            if (visited[i] == false){
-                component++;
-                dfs(adj,visited,i);
-            }
-        }
-        
-        if (edge < component -1 ){
-            return -1;
-        }
-        
-        int redundant = edge - ((n-1)-(component-1));
-        
-        if (redundant >= (component-1))
-            return component-1;
-        
-        return -1;
-    }
-};
