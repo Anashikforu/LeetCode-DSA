@@ -1,10 +1,8 @@
-class Solution(object):
-    def setZeroes(self, matrix):
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
         """
-        :type matrix: List[List[int]]
-        :rtype: None Do not return anything, modify matrix in-place instead.
+        Do not return anything, modify matrix in-place instead.
         """
-        
         zerows = []        
         zecols = []
 
@@ -26,6 +24,4 @@ class Solution(object):
                 matrix[i][zero] = 0
         
         return matrix
-                
-                
-                    
+        
