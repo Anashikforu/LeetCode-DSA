@@ -23,5 +23,5 @@ class Solution:
             for i in range(row):
                 matrix[i][zero] = 0
         
-        return matrix
+        # return matrix
         
