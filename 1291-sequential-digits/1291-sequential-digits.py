@@ -2,13 +2,8 @@ class Solution:
     def sequentialDigits(self, low: int, high: int) -> List[int]:
         
         ans = []
-        
-        digit,start,temp = 1,low,low
-        
-        while start >= 10:
-            digit += 1
-            start /= 10
-        
+        digit = len(str(low))
+        start = int(low/pow(10,digit-1))
         num = 0
         
                 
