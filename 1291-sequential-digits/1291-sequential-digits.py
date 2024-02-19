@@ -2,30 +2,41 @@ class Solution:
     def sequentialDigits(self, low: int, high: int) -> List[int]:
         
         ans = []
-        digits_low = len(str(low))
-        digits_high = len(str(high))
-        superset = "123456789"
+        
+        digit,start,temp = 1,low,low
+        
+        while start >= 10:
+            digit += 1
+            start /= 10
         
         num = 0
-        start_digit = int(low/pow(10,digits_low-1))
-        pos = start_digit-1
-        digit = digits_low
         
+                
         while num <= high:
-            if num>=low:
+            
+            if num >= low:
                 ans.append(num)
+                
+            temp = ""
+            ts = int(start)
+            for i in range(digit):
+                temp += str(ts)
+                ts += 1
+                if ts == 10:
+                    break
+        
             
-            if int(superset[pos:pos+digit]) == num:
+            if int(temp) == num:
                 break
+            elif int(temp) > num:
+                num = int(temp)
                 
-            num = int(superset[pos:pos+digit])
-                
-            pos += 1
+            start += 1
             
-            if num%10==9:
-                pos = 0
+            if ts == 10:
                 digit += 1
+                start = 1
             
-
-        return ans
+        
+        return ans 
         
