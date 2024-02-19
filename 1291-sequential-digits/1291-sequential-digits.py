@@ -13,8 +13,10 @@ class Solution:
         
                 
         while num <= high:
+            
             if num >= low:
                 ans.append(num)
+                
             temp = ""
             ts = int(start)
             for i in range(digit):
@@ -22,20 +24,18 @@ class Solution:
                 ts += 1
                 if ts == 10:
                     break
-                # ts %= 10
+        
             
             if int(temp) == num:
                 break
-            if int(temp) > num:
+            elif int(temp) > num:
                 num = int(temp)
                 
-            print(num)
             start += 1
             
             if ts == 10:
                 digit += 1
                 start = 1
-            # break
             
         
         return ans 
