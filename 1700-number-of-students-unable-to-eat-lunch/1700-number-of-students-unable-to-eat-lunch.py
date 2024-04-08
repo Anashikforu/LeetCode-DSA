@@ -1,20 +1,21 @@
 class Solution:
     def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
         
-        i,j = 0,0
+        circular_sandwich = students.count(0)        
+        square_sandwich = students.count(1)
         
-        while i<len(students) and j<len(sandwiches) :
+        for sandwich in sandwiches:
             
-            if(sandwiches[j] not in students[i:]):
-                break
+            if sandwich == 0 and circular_sandwich == 0:
+                return square_sandwich
             
-            if students[i] == sandwiches[j]:
-                j += 1
+            if sandwich == 1 and square_sandwich == 0:
+                return circular_sandwich
+            
+            if sandwich == 0:
+                circular_sandwich -= 1
             else:
-                students.append(students[i])
-
-            i += 1
-        
-        return len(sandwiches) - j
+                square_sandwich -= 1
         
         
+        return 0
