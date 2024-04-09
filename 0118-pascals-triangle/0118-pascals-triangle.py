@@ -5,9 +5,8 @@ class Solution:
         
         for i in range(1,numRows):
             new_row = [1]
-            last_row = res[i-1]
             for j in range(1,i):
-                new_row.append(last_row[j-1]+last_row[j])
+                new_row.append(res[i-1][j-1]+res[i-1][j])
             new_row.append(1)
             res.append(new_row)
         
