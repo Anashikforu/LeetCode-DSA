@@ -7,13 +7,12 @@ class Solution:
         for string in s:
             temp += str(alphabet.index(string) + 1)
         
-        num = str(temp)
-        
         while k > 0 :
-            temp = str(num)
+            
             num = 0
             for string in temp:
                 num += int(string)
+            temp = str(num)
             k -= 1
             
         return num
