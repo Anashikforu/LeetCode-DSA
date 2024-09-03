@@ -3,36 +3,32 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        break_even = -1 #2154300
-        shuffle_num = -1 
-        
-        num_len = len(nums) -1
-        while num_len > 0:
-            if(nums[num_len] > nums[num_len-1]):
-                break_even = num_len-1
+        length = len(nums) -1
+        dec = -1
+		
+        while length > 0:
+            if nums[length] > nums[length-1]:
+                dec = length-1
                 break
-            num_len -= 1
+            length -= 1
         
+        spoint = dec
+        if dec == -1:
+            spoint = len(nums)-1
+        else:
+            for i in range(dec+1,len(nums)):
+                if nums[i] > nums[dec]:
+                    spoint = i
+                else:
+                    break
         
-        if(break_even == -1):
-            nums.reverse()
-            return
+        print(dec,spoint)
+                
+        nums[dec],nums[spoint] = nums[spoint],nums[dec]
         
-        num_len = len(nums) -1
-        while num_len > break_even:
-            if(nums[num_len] > nums[break_even]):
-                nums[num_len] , nums[break_even] = nums[break_even] , nums[num_len]
-                shuffle_num = num_len
-                break
-            num_len -= 1
-        
-        split = break_even+1
-        nums[split:] = nums[::-1][:len(nums)-split]
-        
-            
-            
-            
-            
-        
-        
-        
+        dec += 1
+        epoint = len(nums) - 1
+        while(dec < epoint):
+            nums[dec],nums[epoint] = nums[epoint],nums[dec]
+            dec += 1
+            epoint -= 1
