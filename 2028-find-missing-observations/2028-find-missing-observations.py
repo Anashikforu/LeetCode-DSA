@@ -11,18 +11,12 @@ class Solution:
         
         disMean = res/n
         res %= n
-        print(res)
+        
         nEle = [int(disMean)]*n
-        index = 0
+      
         
-        
-        while res > 0:
-            nEle[index] += 1
-            
-            res -= 1
-            index += 1
-            if index == n:
-                index = 0
+        for i in range(res):
+            nEle[i] += 1
         
         return nEle
         
