@@ -19,22 +19,27 @@ class Solution:
         remaining_part = length%k 
         
         curr = head
+        prev = curr
         
         for i in range(k):
-            new_part = ListNode(0)
-            tail = new_part
+            new_part = curr
             
             curr_size = limit
             if remaining_part > 0:
                 remaining_part -= 1
                 curr_size += 1
             
-            for j in range(curr_size):
-                tail.next = ListNode(curr.val)
-                tail = tail.next
-                curr = curr.next
+            j = 0
+            while j < curr_size:
+                prev = curr
+                if curr is not None:
+                    curr = curr.next
+                j += 1
             
-            ans[i] = new_part.next
+            if prev is not None:
+                prev.next = None
+            
+            ans[i] = new_part
         
         
         return ans
