@@ -21,7 +21,7 @@ class Solution:
                         dp[i][j] = dp[i-1][j]
                     else:
                         dp[i][j] = dp[i-1][j] +dp[i][j-1]
-        print(dp)
+        # print(dp)
         return dp[m-1][n-1]
                     
         
