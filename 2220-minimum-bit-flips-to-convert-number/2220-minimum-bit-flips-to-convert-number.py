@@ -4,8 +4,8 @@ class Solution:
         xor = start ^ goal
         
         while xor:
-            res += xor & 1
-            xor >>= 1
+            xor &= (xor -1)
+            res += 1
         
         return res
         
