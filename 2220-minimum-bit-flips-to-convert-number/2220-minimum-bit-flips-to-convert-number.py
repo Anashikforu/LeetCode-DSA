@@ -9,18 +9,17 @@ class Solution:
         
         n = max(len(goalB),len(startB))
         
-        # print(goalB ,startB)
-        goalB ,startB = goalB[::-1],startB[::-1]
-        # print(goalB ,startB)
+        greater , lesser = goalB , startB
+        
+        if len(goalB) < len(startB):
+            greater , lesser = startB , goalB
+            
+        for i in range(gap):
+            if greater[i] != '0':
+                res += 1
         
         for i in range(n-gap):
-            if goalB[i] != startB[i]:
-                res += 1
-        greater = goalB
-        if len(goalB) < len(startB):
-            greater = startB
-        for i in range(n-gap,n):
-            if greater[i] != '0':
+            if greater[i+gap] != lesser[i]:
                 res += 1
         
         return res
