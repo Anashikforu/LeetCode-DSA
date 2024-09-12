@@ -3,12 +3,17 @@ class Solution:
         
         res = len(words)
         
+        allowed_bit = 0
+        
+        for char in allowed:
+            allowed_bit = allowed_bit | 1 << (ord(char) - ord("a"))
+            
         for word in words:
             
-            wset = set(word)
-            
-            for ws in wset:
-                if ws not in allowed:
+            for char in word:
+                bit = (allowed_bit >> (ord(char) - ord("a"))) & 1
+                
+                if not bit:
                     res -= 1
                     break
         
